@@ -1,5 +1,6 @@
 # Paul
 
+
 Paul is a hexapod based on esp32 (wemos lolin D32 pro)
 
 Features:
@@ -20,3 +21,6 @@ movelegs(int _resolution);
 
 Comming soon:
 Autonomous walk with a VL53L0 Laser distance sensor
+
+
+![GitHub Logo](/images/Paul.png)
