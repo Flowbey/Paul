@@ -22,7 +22,9 @@ void hexapod::begin() {
 
 }
 
-//=========================================== Attach servo
+//======================================
+//====================================== Attach servo
+//======================================
 
 void hexapod::attachServo( uint8_t servoNumber, uint8_t servoPin, int woffs, bool flipped) {
   servo[servoNumber].pin = servoPin;
@@ -30,7 +32,9 @@ void hexapod::attachServo( uint8_t servoNumber, uint8_t servoPin, int woffs, boo
   servo[servoNumber].flipped = flipped;
 }
 
-//=========================================== Init leg
+//======================================
+//====================================== Init leg (set the lenght of coax, femur and tibia in mm)
+//======================================
 
 void hexapod::init_leg(float _coax, float _femur, float _tibia ) {
   coax = _coax;
@@ -38,7 +42,9 @@ void hexapod::init_leg(float _coax, float _femur, float _tibia ) {
   tibia = _tibia;
 }
 
-//=========================================== Init leg range
+//======================================
+//====================================== init leg range (set the min and max degrees for each joint)
+//======================================
 
 void hexapod::init_leg_range(int _mincoaxw, int _maxcoaxw, int _minfemurw, int _maxfemurw, int _mintibiaw, int _maxtibiaw) {
   mincoaxw = _mincoaxw;
@@ -49,7 +55,9 @@ void hexapod::init_leg_range(int _mincoaxw, int _maxcoaxw, int _minfemurw, int _
   maxtibiaw = _maxtibiaw;
 }
 
-//=========================================== Init koordinate
+//======================================
+//====================================== Init koordinate (set the start coordinates and set offsets, shift from the center of body)
+//======================================
 
 void hexapod::init_koor(uint8_t legNumber, float x, float y, float z, float xoffs, float yoffs, float zoffs) {
   leg[legNumber].x = x;
@@ -90,13 +98,17 @@ void hexapod::init_koor(uint8_t legNumber, float x, float y, float z, float xoff
 #endif
 }
 
-//=========================================== Set steps
+//======================================
+//====================================== set steps (resolution for calculating how many steps)
+//======================================
 
 void hexapod::set_steps(int steps) {
   resolution = steps;
 }
 
-//=========================================== Set new koordinate
+//======================================
+//====================================== Set new koordinate
+//======================================
 
 void hexapod::set_new_koor(uint8_t legNumber, float x, float y, float z, float yaw) {
   leg[legNumber].xstep = (x - leg[legNumber].x ) / resolution;
@@ -104,12 +116,13 @@ void hexapod::set_new_koor(uint8_t legNumber, float x, float y, float z, float y
   leg[legNumber].zstep = (z - leg[legNumber].z ) / resolution;
   leg[legNumber].yawstep = (yaw - leg[legNumber].yaw ) / resolution;
 }
-
-//=========================================== Move
+//======================================
+//====================================== Move
+//======================================
 
 void hexapod::move() {
   //Steps Loop Auflösung in N Schritte
-  //Serial.println(millis());
+
   for (uint8_t i = 0; i < resolution; i++) {
 
 #ifdef DEBUGHEXA_STEP
@@ -129,7 +142,9 @@ void hexapod::move() {
   }
 }
 
-//=========================================== Calculate W
+//======================================
+//====================================== calculate angle
+//======================================
 
 void hexapod::calculateW(uint8_t legNumber) {
 
@@ -174,7 +189,9 @@ void hexapod::calculateW(uint8_t legNumber) {
   leg[legNumber].tibiaw  = acos((sq(L) - sq(tibia) - sq(femur)) / (-2 * tibia * femur)) * 180 / Pi;
 }
 
-//===============================================Write to Servo
+//======================================
+//====================================== write to Servo
+//======================================
 
 int hexapod::writeServo(uint8_t legNumber) {
   uint8_t coaxServoNumber   =  (legNumber * 3) + 0;
@@ -277,7 +294,9 @@ int hexapod::writeServo(uint8_t legNumber) {
   return 1;
 }
 
-// ====================================== Pulse Widht
+//======================================
+// ===================================== Pulse Widht
+//======================================
 
 int hexapod::pulseWidth(int angle)
 {
@@ -340,7 +359,7 @@ int hexapod::walk(int repeat , int amplitudeX, int amplitudeY, int amplitudeZ, f
 }
 
 //======================================
-//====================================== intro WALK
+//====================================== intro walk
 //======================================
 
 int hexapod::introwalk(int amplitudeX, int amplitudeY, int amplitudeZ, float yaw ) {
@@ -445,7 +464,7 @@ int hexapod::outrowalk(int amplitudeX, int amplitudeY, int amplitudeZ, float yaw
 }
 
 //======================================
-//====================================== Move relative to All Legs
+//====================================== move all legs relative to to homepoint
 //======================================
 
 int hexapod::movetoall(int amplitudeX, int amplitudeY, int amplitudeZ, float yaw ) {
@@ -492,7 +511,7 @@ int hexapod::movetoall(int amplitudeX, int amplitudeY, int amplitudeZ, float yaw
 }
 
 //======================================
-//====================================== Move relative to one leg
+//====================================== set new coordinates relative to current position
 //======================================
 
 int hexapod::settoleg(uint8_t legNumber, int amplitudeX, int amplitudeY, int amplitudeZ, float yaw ) {

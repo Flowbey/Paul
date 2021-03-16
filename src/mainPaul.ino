@@ -1,7 +1,13 @@
 #include <Arduino.h>
+#include <SPI.h>
+#include <nRF24L01.h>
+#include <RF24.h>
+#include <Adafruit_PWMServoDriver.h>
 #include "hexapod.h"
-#include "nrf24twoway.h"
+#include "nrf24twoway.h"                            // make sure to set the CE and CSN pins in nrf24twoway.h file
 #include "StringSplitter.h"
+
+
 
 //#define ENABLE_DEBUG1
 
@@ -39,7 +45,7 @@ void setup() {
   Serial.begin(115200);
   delay(1000);
   Serial.println("Start");
-  funk.begin(2);
+  funk.begin(2);                 // 1 for sender 2 for receiver
 
 
   paul.begin();

@@ -5,9 +5,9 @@
 #include <SPI.h>
 #include <nRF24L01.h>
 #include <RF24.h>
-#define charsize 30
-#define cepin 27
-#define csnpin 14
+#define charsize 30                               // Max chars for transmitting
+#define cepin 27                                  // CE Pin NRF24 Modul
+#define csnpin 14                                 // CSN Pin NRF24 Modul
 
 
 
@@ -26,7 +26,7 @@ class nrf24twoway {
     RF24 radio = RF24(cepin, csnpin);
 
   private:
-    
+
 
 };
 
