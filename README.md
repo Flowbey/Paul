@@ -9,11 +9,14 @@ Features:
 - Power 24A max peak for the servos
 
 Controlling:
-Send a string like "3,0,20,0,10,0" means command 3 for walk, 0 times repeat, 20mm forward, 0mm sideway, 10mm step high, 0 degre tourn
+Send a string like "3,0,20,0,10,0" means command 3 for walk, 0 times repeat, 20mm forward, 0mm sideway, 10mm step high, 0 degre turn
+
 You can easly add more commands with the functions:
 
 settoleg(uint8_t legNumber, int aplitudeX, int aplitudeY, int amplitudeZ, float yaw);     
 movelegs(int _resolution);  
+
+
 
 Comming soon:
 Autonomous walk with a VL53L0 Laser distance sensor
